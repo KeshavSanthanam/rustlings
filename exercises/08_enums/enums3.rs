@@ -1,3 +1,5 @@
+use std::u8;
+
 struct Point {
     x: u64,
     y: u64,
@@ -46,6 +48,24 @@ impl State {
     fn process(&mut self, message: Message) {
         // TODO: Create a match expression to process the different message
         // variants using the methods defined above.
+        match message {
+            Message::ChangeColor(red, green, blue) => {
+                self.color = (red, green, blue);
+            }
+            Message::Echo(str) => {
+                self.message = str;
+            }
+            Message::Move(point) => {
+                self.position = point;
+            }
+            Message::Quit => {
+                self.quit = true;
+            }
+            Message::Resize { width, height } => {
+                self.width = width;
+                self.height = height;
+            }
+        }
     }
 }
 
